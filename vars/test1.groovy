@@ -1,7 +1,7 @@
-def abc = "Hello"
-def xyz = 10
+def new1() {
 
-print "abc = ${abc}"
-print "xyz = ${xyz}"
-
-print abc
+    print "hello"
+    def xyz = "hello"
+    print "xyz = ${xyz}"
+    print "abc = ${abc}"
+}
