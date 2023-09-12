@@ -10,6 +10,9 @@ def call() {
                 steps {
                     echo 'compile'
                 }
+                script {
+                    common.compile
+                }
             }
             stage('Unit Tests') {
                 steps {
