@@ -28,9 +28,12 @@ def call() {
             }
              steps {
                  script {
+                     SONAR_PASS = sh ( script: 'aws ssm get-parameters --region us-east-1 --names sonarqube.pass --with-decryption --query parameters[0].value | sed \'s/"//g\'', returnstdout: true).trim()
                      wrap([$class: 'MaskPasswordsBuildWrapper', varspasswordpairs: [[password: "${mypassword}", var: 'PASSWORD']]]) {
+                         println "Password = ${SONAR_PASS}"
+                         sh "echo sh password = ${SONAR_PASS}"
                          ssh "sonar-scanner -Dsonar.host.url=http://172.31.31.111:9000 -Dsonar.login=${SONAR_USER} -Dsonar.password=${SONAR_PASS} -Dsonar.projectkey=cart"
-                     }
+
                     }
                 }
             }
@@ -46,3 +49,4 @@ def call() {
       common.email("Failed")
   }
 }
+
