@@ -19,6 +19,12 @@ def unittests() {
         sh 'python -m unittest'
     }
 }
-def email(email_not) {
+def email(email_note) {
     sh 'echo ${email_note}'
+}
+def artifactpush() {
+    if (app_lang == "nodejs") {
+        sh "zip -r cart-${TAG_NAME}.zip node_modules server.js"
+    }
+    sh 'ls -l'
 }
