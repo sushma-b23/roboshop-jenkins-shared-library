@@ -1,5 +1,9 @@
 def call() {
   try {
+
+      if(!env.extrafiles) {
+          env.extrafiles= " "
+      }
       pipeline {
 
           agent {
