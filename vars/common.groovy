@@ -3,7 +3,7 @@ def compile() {
         sh 'npm install'
     }
     if (app_lang == "maven") {
-        sh 'mvn package'
+        sh "mvn package && cp target/${component}-1.0.jar ${component}.jar"
     }
 }
 
@@ -26,6 +26,12 @@ def artifactpush() {
     sh "echo ${TAG_NAME} >VERSION"
     if (app_lang == "nodejs") {
         sh "zip -r ${component}-${TAG_NAME}.zip node_modules server.js ${extraFiles}"
+    }
+    if (app_lang == "nginx") {
+        sh "zip -r ${component}-${TAG_NAME}.zip * ${component}.jar VERSION"
+    }
+    if (app_-lang == "maven") {
+        sh "zip -r ${component}-${TAG_NAME}.zip * ${component}.jar VERSION"
     }
 
 
